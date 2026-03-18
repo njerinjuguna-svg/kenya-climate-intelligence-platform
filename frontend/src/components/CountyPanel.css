@@ -1,0 +1,61 @@
+.county-panel {
+  width: 320px;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+}
+
+.no-selection {
+  text-align: center;
+  margin-top: 50px;
+  color: #666;
+}
+
+.no-selection h3 {
+  color: #1a5c38;
+  margin-bottom: 10px;
+}
+
+.county-panel h2 {
+  color: #1a5c38;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #1a5c38;
+}
+
+.county-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-card {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 4px solid #2c7a4b;
+}
+
+.stat-card.highlight {
+  background: #e8f5e9;
+  border-left-color: #1a5c38;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #333;
+}
+
+.stat-value.large {
+  font-size: 1.3rem;
+  color: #1a5c38;
+}
