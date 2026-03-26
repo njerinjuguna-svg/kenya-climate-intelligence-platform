@@ -21,3 +21,15 @@ export const getVegetation = async (countyId) => {
   const response = await axios.get(`${API_BASE_URL}/vegetation/${countyId}`);
   return response.data;
 };
+
+// NEW: Get NDVI trend for charts
+export const getNDVITrend = async (countyId) => {
+  const response = await axios.get(`${API_BASE_URL}/counties/${countyId}/ndvi`);
+  return response.data;
+};
+
+// NEW: Get rainfall trend for charts
+export const getRainfallTrend = async (countyId) => {
+  const response = await axios.get(`${API_BASE_URL}/counties/${countyId}/rainfall`);
+  return response.data;
+};

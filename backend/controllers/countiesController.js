@@ -62,4 +62,52 @@ const getCountiesGeoJSON = async (req, res) => {
   }
 };
 
-module.exports = { getAllCounties, getCountyById, getCountiesGeoJSON };
+// Get NDVI trend for a county (for charts)
+const getNDVITrend = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      `SELECT 
+        v.date,
+        v.ndvi_value,
+        v.vegetation_health
+       FROM vegetation_index v
+       WHERE v.county_id = $1
+       ORDER BY v.date`,
+      [id]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching NDVI trend:', error);
+    res.status(500).json({ error: 'Failed to fetch NDVI trend' });
+  }
+};
+
+// Get rainfall trend for a county (for charts)
+const getRainfallTrend = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      `SELECT 
+        r.date,
+        r.rainfall_mm,
+        r.data_source
+       FROM rainfall_data r
+       WHERE r.county_id = $1
+       ORDER BY r.date`,
+      [id]
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching rainfall trend:', error);
+    res.status(500).json({ error: 'Failed to fetch rainfall trend' });
+  }
+};
+
+module.exports = { 
+  getAllCounties, 
+  getCountyById, 
+  getCountiesGeoJSON,
+  getNDVITrend,
+  getRainfallTrend
+};

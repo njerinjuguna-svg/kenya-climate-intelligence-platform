@@ -1,0 +1,50 @@
+.climate-charts {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.chart-wrapper {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+}
+
+.chart-loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+}
+
+.chart-legend {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  font-size: 0.82rem;
+}
+
+.chart-legend h4 {
+  color: #1a5c38;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.legend-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.legend-item {
+  padding: 2px 0;
+  font-size: 0.82rem;
+}
+
+.legend-item.red    { color: #e74c3c; font-weight: 600; }
+.legend-item.orange { color: #e67e22; font-weight: 600; }
+.legend-item.blue   { color: #2980b9; font-weight: 600; }
+.legend-item.green  { color: #27ae60; font-weight: 600; }
