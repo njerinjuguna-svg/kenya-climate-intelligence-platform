@@ -12,21 +12,19 @@ const MapController = ({ selectedCounty, geoData }) => {
   useEffect(() => {
     if (!selectedCounty || !geoData) return;
 
-    // Find the county's feature in GeoJSON
     const feature = geoData.features.find(
       f => f.properties.adm1_name === selectedCounty.adm1_name
     );
 
     if (feature) {
-      // Calculate bounds and fly to it
       const L = require('leaflet');
       const layer = L.geoJSON(feature);
       map.flyToBounds(layer.getBounds(), {
         padding: [50, 50],
-        duration: 1.5  // smooth animation duration in seconds
+        duration: 1.5
       });
     }
-  }, [selectedCounty]);
+  }, [selectedCounty, geoData, map]); // ← add geoData and map here
 
   return null;
 };
@@ -37,7 +35,7 @@ const KenyaMap = ({ climateData, onCountySelect, counties }) => {
   const geoJsonRef = useRef(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/counties/geojson')
+    axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/counties/geojson`)
       .then(res => setGeoData(res.data))
       .catch(err => console.error('Error loading map data:', err));
   }, []);
