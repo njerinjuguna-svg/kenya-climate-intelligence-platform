@@ -5,10 +5,12 @@ const {
   getCountyById, 
   getCountiesGeoJSON,
   getNDVITrend,
-  getRainfallTrend
+  getRainfallTrend,
+  getLandCover
 } = require('../controllers/countiesController');
 
 router.get('/geojson', getCountiesGeoJSON);
+router.get('/landcover', getLandCover);
 router.get('/:id/ndvi', getNDVITrend);
 router.get('/:id/rainfall', getRainfallTrend);
 router.get('/', getAllCounties);

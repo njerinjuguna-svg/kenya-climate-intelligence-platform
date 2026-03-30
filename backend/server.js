@@ -5,6 +5,7 @@ const countiesRoute = require('./routes/counties');
 const climateRiskRoute = require('./routes/climateRisk');
 const rainfallRoute = require('./routes/rainfall');
 const vegetationRoute = require('./routes/vegetation');
+const authRoute = require('./routes/auth');
 require('dotenv').config();
 
 const app = express();
@@ -22,6 +23,7 @@ app.use('/counties', countiesRoute);
 app.use('/climate-risk', climateRiskRoute);
 app.use('/rainfall', rainfallRoute);
 app.use('/vegetation', vegetationRoute);
+app.use('/auth', authRoute);
 
 
 // Start server

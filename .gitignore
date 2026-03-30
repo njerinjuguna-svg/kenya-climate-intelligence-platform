@@ -139,4 +139,30 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
 
-backend/gee-credentials.json
+# Google credentials - never push
+backend/gee-credentials..json
+backend/*.json
+scripts/service-account*.json
+
+# Environment files
+backend/.env
+frontend/.env.local
+frontend/.env.production
+scripts/.env
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Python
+scripts/venv/
+__pycache__/
+*.pyc
+
+# Credentials
+backend/gee-credentials*.json
+backend/*.json
+
+# Data files
+data/*.csv

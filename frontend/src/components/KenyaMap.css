@@ -4,6 +4,13 @@
   position: relative;
 }
 
+.map-search {
+  position: absolute;
+  top: 15px;
+  left: 60px;
+  z-index: 1000;
+}
+
 .map-legend {
   position: absolute;
   bottom: 30px;

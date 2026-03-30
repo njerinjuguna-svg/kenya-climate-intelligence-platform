@@ -104,10 +104,35 @@ const getRainfallTrend = async (req, res) => {
   }
 };
 
+
+// Get land cover data for map layer
+const getLandCover = async (req, res) => {
+  try {
+    const result = await pool.query(
+      `SELECT 
+        c.ogc_fid,
+        c.adm1_name,
+        l.year,
+        l.forest_percent,
+        l.cropland_percent,
+        l.urban_percent,
+        l.bare_land_percent
+       FROM land_cover l
+       JOIN counties c ON l.county_id = c.ogc_fid
+       ORDER BY c.adm1_name, l.year`
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching land cover:', error);
+    res.status(500).json({ error: 'Failed to fetch land cover data' });
+  }
+};
+
 module.exports = { 
   getAllCounties, 
   getCountyById, 
   getCountiesGeoJSON,
   getNDVITrend,
-  getRainfallTrend
+  getRainfallTrend,
+  getLandCover
 };

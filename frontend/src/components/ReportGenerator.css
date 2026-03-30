@@ -1,0 +1,25 @@
+.report-generator {
+  margin-top: 15px;
+}
+
+.report-btn {
+  width: 100%;
+  padding: 12px;
+  background: #1a5c38;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.report-btn:hover {
+  background: #2c7a4b;
+}
+
+.report-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}

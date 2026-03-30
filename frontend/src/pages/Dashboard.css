@@ -18,3 +18,34 @@
   font-size: 1.5rem;
   color: #2c7a4b;
 }
+
+/* Tablet */
+@media (max-width: 900px) {
+  .dashboard-body {
+    flex-direction: column;
+  }
+
+  .county-panel {
+    width: 100% !important;
+    height: 50vh;
+    overflow-y: auto;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .header h1 {
+    font-size: 0.9rem !important;
+  }
+
+  .county-panel {
+    width: 100% !important;
+    height: 55vh;
+    padding: 15px;
+  }
+
+  .map-legend {
+    bottom: 55vh !important;
+  }
+}

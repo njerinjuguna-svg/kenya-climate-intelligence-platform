@@ -1,23 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { getClimateRisk } from '../services/api';
+import { getClimateRisk, getCounties } from '../services/api';
 import KenyaMap from '../components/KenyaMap';
 import CountyPanel from '../components/CountyPanel';
 import Header from '../components/Header';
 import './Dashboard.css';
 
-const Dashboard = () => {
+const Dashboard = ({ user, onLogout }) => {
   const [climateData, setClimateData] = useState([]);
+  const [counties, setCounties] = useState([]);
   const [selectedCounty, setSelectedCounty] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getClimateRisk();
-        setClimateData(data);
+        const [climate, countyList] = await Promise.all([
+          getClimateRisk(),
+          getCounties()
+        ]);
+        setClimateData(climate);
+        setCounties(countyList);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching climate data:', error);
+        console.error('Error fetching data:', error);
         setLoading(false);
       }
     };
@@ -26,7 +31,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <Header />
+      <Header user={user} onLogout={onLogout} />
       <div className="dashboard-body">
         {loading ? (
           <div className="loading">Loading climate data...</div>
@@ -34,6 +39,7 @@ const Dashboard = () => {
           <>
             <KenyaMap
               climateData={climateData}
+              counties={counties}
               onCountySelect={setSelectedCounty}
             />
             <CountyPanel county={selectedCounty} />

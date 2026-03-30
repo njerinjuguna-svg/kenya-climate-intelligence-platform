@@ -1,5 +1,6 @@
 import React from 'react';
 import ClimateCharts from './ClimateCharts';
+import ReportGenerator from './ReportGenerator';
 import './CountyPanel.css';
 
 const CountyPanel = ({ county }) => {
@@ -19,7 +20,6 @@ const CountyPanel = ({ county }) => {
     );
   }
 
-  // Helper to color risk level text
   const getRiskColor = (risk) => {
     if (risk === 'High') return '#e74c3c';
     if (risk === 'Medium') return '#f39c12';
@@ -36,7 +36,6 @@ const CountyPanel = ({ county }) => {
   return (
     <div className="county-panel">
       <h2>{county.adm1_name} County</h2>
-
       <div className="county-stats">
         <div className="stat-card">
           <span className="stat-label">Drought Risk</span>
@@ -44,19 +43,16 @@ const CountyPanel = ({ county }) => {
             {county.drought_risk || 'No data'}
           </span>
         </div>
-
         <div className="stat-card">
           <span className="stat-label">Flood Risk</span>
           <span className="stat-value" style={{color: getRiskColor(county.flood_risk)}}>
             {county.flood_risk || 'No data'}
           </span>
         </div>
-
         <div className="stat-card">
           <span className="stat-label">Rainfall Trend</span>
           <span className="stat-value">{county.rainfall_trend || 'No data'}</span>
         </div>
-
         <div className="stat-card">
           <span className="stat-label">Vegetation Change</span>
           <span className="stat-value" style={{
@@ -65,7 +61,6 @@ const CountyPanel = ({ county }) => {
             {county.vegetation_change ? `${county.vegetation_change}%` : 'No data'}
           </span>
         </div>
-
         <div className="stat-card highlight">
           <span className="stat-label">Overall Risk Score</span>
           <span className="stat-value large" style={{
@@ -74,7 +69,6 @@ const CountyPanel = ({ county }) => {
             {county.risk_score ? `${county.risk_score} / 10` : 'No data'}
           </span>
         </div>
-
         <div className="stat-card">
           <span className="stat-label">Area</span>
           <span className="stat-value">
@@ -83,7 +77,10 @@ const CountyPanel = ({ county }) => {
         </div>
       </div>
 
-      {/* Real satellite data charts */}
+      {/* PDF Report Button */}
+      <ReportGenerator county={county} />
+
+      {/* Charts */}
       <ClimateCharts county={county} />
     </div>
   );
