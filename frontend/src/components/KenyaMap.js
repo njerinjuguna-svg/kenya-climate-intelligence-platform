@@ -28,7 +28,6 @@ const MapController = ({ selectedCounty, geoData }) => {
 
   return null;
 };
-
 const KenyaMap = ({ climateData, onCountySelect, counties }) => {
   const [geoData, setGeoData] = useState(null);
   const [selectedCounty, setSelectedCounty] = useState(null);
@@ -89,11 +88,15 @@ const KenyaMap = ({ climateData, onCountySelect, counties }) => {
   };
 
   // Handle county selected from search bar
-  const handleSearchSelect = (county) => {
-    setSelectedCounty(county);
-    onCountySelect(county);
-  };
-
+ const handleSearchSelect = (county) => {
+  // Find the full climate data for this county
+  const fullCountyData = climateData.find(
+    d => d.adm1_name === county.adm1_name
+  );
+  const selected = fullCountyData || county;
+  setSelectedCounty(selected);
+  onCountySelect(selected);
+};
   return (
     <div className="map-container">
       {/* Search bar floating on top of map */}
