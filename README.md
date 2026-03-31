@@ -1,6 +1,6 @@
 # Kenya Climate & Environmental Intelligence Platform
 
-> *Built by a geospatial engineer who believes that the most urgent problems on the African continent are not problems of ambition — they are problems of data, visibility, and decision support.*
+> *Built by a geospatial engineer who believes that the most urgent problems on the African continent are not problems of ambition. They are problems of data, visibility, and decision support.*
 
 ---
 
@@ -24,7 +24,7 @@ This is not a prototype. The data is real. The analysis is real. The risk scores
 
 ## Why This Matters
 
-Kenya is one of the most climate vulnerable countries in the world. The effects are not abstract:
+Kenya is one of the most climate vulnerable countries in the world. The effects are not abstract.
 
 **Turkana, Marsabit, Mandera, and Wajir** counties are classified as chronically food insecure, with drought cycles becoming shorter and more severe.
 
@@ -40,9 +40,22 @@ The gap between satellite data and ground level decisions is where people suffer
 
 ## Live Demo
 
-🌐 **[kenya-climate-platform.vercel.app](https://kenya-climate-platform.vercel.app)**
+🌐 🌐 **[kenya-climate-intelligence-platform-henna.vercel.app](https://kenya-climate-intelligence-platform-henna.vercel.app)**
 
-> To request demo access, contact me via GitHub.
+No login required. Open and explore freely.
+
+---
+
+## Screenshots
+
+**Interactive Risk Map**
+All 47 counties color coded by calculated climate risk score. Click any county to load its full climate profile including real satellite data charts.
+
+**County Climate Panel**
+Real NDVI vegetation trends and annual rainfall data pulled directly from NASA MODIS and CHIRPS satellite datasets processed through Google Earth Engine.
+
+**PDF Report**
+One click downloadable Environmental Assessment Report with risk indicators, trend tables, and tailored recommendations.
 
 ---
 
@@ -55,19 +68,16 @@ All 47 Kenya counties rendered from real spatial data. Counties are color coded 
 NDVI vegetation health from NASA MODIS covering 2005 to 2024. Annual rainfall from the CHIRPS dataset covering 2000 to 2023. Data extracted and processed using Google Earth Engine. 20 year trend analysis showing environmental change over time.
 
 **Climate Risk Scoring**
-A weighted algorithm combining drought risk at 35%, rainfall trend at 30%, vegetation change at 20%, and flood exposure at 15%. Scores are calculated by Python scripts from real data and classified as Very High, High, Medium, or Low.
+A weighted algorithm combining drought risk at 35%, rainfall trend at 30%, vegetation change at 20%, and flood exposure at 15%. Scores are calculated by Python scripts from real satellite data and classified as Very High, High, Medium, or Low.
 
 **County Climate Panel**
-Each county displays drought risk, flood risk, rainfall trend, and vegetation change. An NDVI line chart shows vegetation health across three time periods. A rainfall bar chart uses color coding to classify wet and dry years. Interpretation guides explain what the values mean.
+Each county displays drought risk, flood risk, rainfall trend, and vegetation change percentage. An NDVI line chart shows vegetation health across three time periods. A rainfall bar chart uses color coding to classify wet and dry years. Interpretation guides explain what the values mean in plain language.
 
 **PDF Report Generation**
-One click downloadable Environmental Assessment Report per county. Includes risk indicators, NDVI trend table, rainfall data, and tailored recommendations. Professional formatting suitable for organizational reporting and submissions.
-
-**Authentication System**
-JWT based login for analysts. Role based access for admin and analyst accounts. Secure password hashing with bcrypt.
+One click downloadable Environmental Assessment Report per county. Includes risk indicators, NDVI trend table, rainfall data table, and tailored recommendations based on the county's actual data. Professional formatting suitable for organizational reporting and submissions.
 
 **Data Pipeline**
-Python scripts for loading and processing GEE exports. Automated climate risk recalculation from real data. PostGIS spatial database for storing and querying geographic data.
+Python scripts for loading and processing Google Earth Engine exports. Automated climate risk recalculation from real data. PostGIS spatial database for storing and querying geographic data.
 
 ---
 
@@ -76,12 +86,11 @@ Python scripts for loading and processing GEE exports. Automated climate risk re
 | Layer | Technology | Why |
 |---|---|---|
 | Frontend | React, Leaflet, Chart.js | Industry standard for geospatial web applications |
-| Backend | Node.js, Express | Fast REST API with straightforward PostgreSQL integration |
+| Backend | Node.js, Express | Fast REST API with clean PostgreSQL integration |
 | Database | PostgreSQL with PostGIS | The gold standard for spatial data storage and querying |
 | Satellite Data | Google Earth Engine | Access to 80 petabytes of planetary scale geospatial datasets |
 | Data Processing | Python, pandas, SQLAlchemy | Scientific computing ecosystem for spatial analysis |
-| Authentication | JWT, bcryptjs | Stateless, secure auth suitable for API first architecture |
-| Hosting | Vercel, Render, Supabase | Zero cost production deployment with PostGIS support |
+| Hosting | Vercel, Render | Production deployment with zero cost |
 
 ---
 
@@ -114,7 +123,7 @@ Google Earth Engine
    rainfall_data, climate_risk)
           |
    Node.js REST API
-  (Express with 8 endpoints)
+  (Express with 10 endpoints)
           |
   React Web Dashboard
   (Leaflet map + Chart.js)
@@ -125,13 +134,13 @@ Google Earth Engine
 
 ---
 
-## Getting Started
+## Getting Started Locally
 
 ### Prerequisites
 
 Node.js v18 or higher, Python 3.10 or higher, PostgreSQL 13 or higher with PostGIS extension, Google Earth Engine account for data extraction.
 
-### Local Setup
+### Setup
 
 **1. Clone the repository**
 ```bash
@@ -164,9 +173,7 @@ CREATE DATABASE climate_platform;
 CREATE EXTENSION postgis;
 ```
 
-Run the table creation scripts from `docs/schema.sql`
-
-**4. Set up Python scripts**
+**4. Set up Python environment**
 ```bash
 cd scripts
 python -m venv venv
@@ -187,12 +194,12 @@ REACT_APP_API_URL=http://localhost:3000
 
 **6. Start the application**
 
-Terminal 1 for the backend:
+Terminal 1:
 ```bash
 cd backend && node server.js
 ```
 
-Terminal 2 for the frontend:
+Terminal 2:
 ```bash
 cd frontend && npm start
 ```
@@ -214,8 +221,6 @@ Open `http://localhost:3001`
 | GET | /climate-risk/:id | Risk data for a specific county |
 | GET | /rainfall | All rainfall data |
 | GET | /vegetation | All vegetation index data |
-| POST | /auth/register | Register new analyst |
-| POST | /auth/login | Login and receive JWT token |
 
 ---
 
@@ -225,25 +230,23 @@ Open `http://localhost:3001`
 kenya-climate-intelligence-platform/
     backend/
         controllers/        Route handlers
-        middleware/         JWT authentication
-        models/             Database models
+        middleware/         Auth middleware
         routes/             API routes
         db.js               Database connection
-        server.js           Express app entry point
+        server.js           Express entry point
     frontend/
         src/
-            components/     React components
+            components/
                 KenyaMap.js
                 CountyPanel.js
                 ClimateCharts.js
                 ReportGenerator.js
                 SearchBar.js
                 Header.js
-            pages/          Page components
+            pages/
                 Dashboard.js
-                Login.js
             services/
-                api.js      API calls
+                api.js
     scripts/
         db_connect.py
         fetch_counties.py
@@ -259,7 +262,7 @@ kenya-climate-intelligence-platform/
 
 ## Roadmap
 
-FME automated data pipelines for scheduled updates. Land cover change layer on the map. Google Earth Engine Python API integration for direct database updates. Time slider for comparing NDVI across years on the map. County to county comparison tool. Automated PDF report scheduling via email. Mobile app built with React Native. Integration with Kenya Open Data Portal.
+FME automated data pipelines for scheduled updates. Land cover change layer on the map. Google Earth Engine Python API integration for direct database updates. Time slider for comparing NDVI across years on the map. County to county comparison tool. Mobile app built with React Native. Integration with Kenya Open Data Portal.
 
 ---
 
@@ -267,13 +270,13 @@ FME automated data pipelines for scheduled updates. Land cover change layer on t
 
 **Fides Njeri** is a geospatial engineer and backend developer based in Kenya, currently completing a one year software development fellowship while building at the intersection of GIS and full stack engineering.
 
-Her academic background is in **Geomatics and Geospatial Information Systems**, giving her a foundation in spatial data, remote sensing, and geographic analysis. The fellowship added production grade backend engineering to that foundation including Node.js, RESTful APIs, database design, authentication systems, and deployment pipelines.
+Her academic background is in **Geomatics and Geospatial Information Systems**, giving her a foundation in spatial data, remote sensing, and geographic analysis. The fellowship added production grade backend engineering to that foundation including Node.js, RESTful APIs, database design, and deployment pipelines.
 
 This project sits at the center of both worlds.
 
 The decision to build a climate intelligence platform was not arbitrary. Kenya's climate crisis is visible, measurable, and urgent. The tools to monitor it have existed for years in the form of satellite data and open datasets. What was missing was someone willing to pull those tools together into something accessible to the people making decisions on the ground. That gap felt worth closing.
 
-The platform was built entirely from scratch over the course of the fellowship including the database schema, API, Python data pipeline, React frontend, and GEE integration. It is a demonstration that geospatial intelligence work does not have to live in desktop GIS software alone. It can live on the web, in the hands of anyone with a browser.
+The platform was built entirely from scratch over the course of the fellowship including the database schema, API, Python data pipeline, React frontend, and Google Earth Engine integration. It is a demonstration that geospatial intelligence work does not have to live in desktop GIS software alone. It can live on the web, in the hands of anyone with a browser.
 
 ---
 
