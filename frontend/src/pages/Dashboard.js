@@ -5,7 +5,7 @@ import CountyPanel from '../components/CountyPanel';
 import Header from '../components/Header';
 import './Dashboard.css';
 
-const Dashboard = ({ user, onLogout }) => {
+const Dashboard = () => {
   const [climateData, setClimateData] = useState([]);
   const [counties, setCounties] = useState([]);
   const [selectedCounty, setSelectedCounty] = useState(null);
@@ -31,7 +31,7 @@ const Dashboard = ({ user, onLogout }) => {
 
   return (
     <div className="dashboard">
-      <Header user={user} onLogout={onLogout} />
+      <Header />
       <div className="dashboard-body">
         {loading ? (
           <div className="loading">Loading climate data...</div>

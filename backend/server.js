@@ -5,19 +5,17 @@ require('dotenv').config();
 
 const app = express();
 
-// Allow requests from your Vercel frontend
 app.use(cors({
   origin: [
     'http://localhost:3005',
-    'kenya-climate-intelligence-platform-v6ur-rmas0s83p.vercel.app',
-    // Add your actual Vercel URL here
+    'https://kenya-climate-intelligence-platform-henna.vercel.app',
+    'https://kenya-climate-intelligence-platform-v6ur-1gj8hum54.vercel.app',
   ],
   credentials: true
 }));
 
 app.use(express.json());
 
-// Routes
 const countiesRoute = require('./routes/counties');
 const climateRiskRoute = require('./routes/climateRisk');
 const rainfallRoute = require('./routes/rainfall');
@@ -25,19 +23,7 @@ const vegetationRoute = require('./routes/vegetation');
 const authRoute = require('./routes/auth');
 
 app.get('/', (req, res) => {
-  res.json({ 
-    message: 'Kenya Climate Platform API is running!',
-    version: '1.0.0',
-    endpoints: [
-      'GET /counties',
-      'GET /counties/geojson',
-      'GET /climate-risk',
-      'GET /rainfall',
-      'GET /vegetation',
-      'POST /auth/login',
-      'POST /auth/register'
-    ]
-  });
+  res.json({ message: 'Kenya Climate Platform API is running!' });
 });
 
 app.use('/counties', countiesRoute);
