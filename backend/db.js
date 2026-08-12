@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 const { create } = require('domain');
-require('dotenv').config();
+require('dotenv').config({ override: false });
 
 const pool = new Pool({
   host: process.env.DB_HOST,
